@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="nut.css" />
+</head>
+<body>
+    <div class="nav" id="nav">
+        <div class="lah">
+            <img src="logo.jpeg" height="40px" width="50px" />
+            Nutrition
+        </div>
+        <div class="bo">
+            <a href="#home" class="a">Home</a>
+            <a href="#ft" class="a">Food Tracker</a>
+            <a href="#mp" class="a">Meal Planner</a>
+            <a href="#contact" class="a">Contact</a>
+        </div>
+    </div>
+    <div class="ani">
+        <marquee>
+            Fuel your body, Nourish your life!
+        </marquee>
+    </div>
+    <div class="home" id="home">
+        <header>
+            <img src="nut.jpeg">
+            <h1>Health and Wellness Tracker</h1>
+            <p id="welcome-message">Welcome!</p>
+        </header>
+        <div class="container">
+            <div class="section">
+                <h2>Daily Health Tip</h2>
+                <p id="daily-tip">Health Tip: Eat more fiber-rich foods</p>
+                <button onclick="updateDailyTip()">Get New Tip</button>
+            </div>
+            <div class="section">
+                <h2>Featured Recipe</h2>
+                <p id="featured-recipe">Featured Recipe: Quinoa and Vegetable Stir Fry</p>
+                <button onclick="updateFeaturedRecipe()">Get New Recipe</button>
+            </div>
+            <div class="section" id="bmi-calculator">
+                <h2>BMI Calculator</h2>
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" placeholder="e.g., 70">
+                <label for="height">Height (m):</label>
+                <input type="number" id="height" step="0.01" placeholder="e.g., 1.75">
+                <button onclick="calculateBMI()">Calculate BMI</button>
+                <p id="bmi-result"></p>
+            </div>
+        </div>
+    </div>
+    <div class="ft" id="ft">
+        <header>
+            <h1>Nutrition Tracker</h1>
+        </header>
+        <main>
+            <section>
+                <h2>Track Your Meals</h2>
+                <label for="breakfast">Breakfast (kcal):</label>
+                <input type="number" id="breakfast" placeholder="e.g., 300">
+                <label for="lunch">Lunch (kcal):</label>
+                <input type="number" id="lunch" placeholder="e.g., 500"><br><br>
+                <label for="snack">Snacks (kcal):</label>
+                <input type="number" id="snack" placeholder="e.g., 200">
+                <label for="dinner">Dinner (kcal):</label>
+                <input type="number" id="dinner" placeholder="e.g., 400">
+                <button onclick="trackMeals()">Track Meals</button>
+            </section>
+
+            <section>
+                <h2>Track Your Water Intake</h2>
+                <label for="water">Water (ml):</label>
+                <input type="number" id="water" placeholder="e.g., 2000">
+                <button onclick="trackWater()">Track Water</button>
+            </section>
+
+            <section>
+                <h2>Summary</h2>
+                <div class="summary">
+                    <div>Total Calories: <span id="total-calories">0</span> kcal</div>
+                    <div>Total Carbs: <span id="total-carbs">0</span> g</div>
+                    <div>Total Protein: <span id="total-protein">0</span> g</div>
+                    <div>Total Fats: <span id="total-fats">0</span> g</div>
+                    <div>Total Water: <span id="total-water">0</span> ml</div>
+                </div>
+            </section>
+
+            <section>
+                <h2>Nutrition Score</h2>
+                <div class="nutrition-score">
+                    <span id="nutrition-score">0</span> / 100
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="mp" id="mp">
+        <header>
+            <h1>Weekly Meal Planner</h1>
+            <p>Generate a personalized meal plan based on your weekly calorie goal.</p>
+        </header>
+        <main>
+            <div class="form-container">
+                <label for="weekly-calories">Enter Weekly Calorie Goal:</label>
+                <input type="number" id="weekly-calories" placeholder="e.g., 14000">
+                <button onclick="generateMealPlan()">Generate Meal Plan</button>
+            </div>
+            <div class="table-container">
+                <table id="meal-plan-table">
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Breakfast</th>
+                            <th>Lunch</th>
+                            <th>Snacks</th>
+                            <th>Dinner</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <div class="contact" id="contact">
+        <header>
+            <h2>Contact Us</h2>
+            <div>
+                <p>Email: <a href="mailto:charithasree_peram@srmap.edu.in">charithasree_peram@srmap.edu.in</a></p>
+                <p>Phone:<a href="tel:+1234567890">+123 456 7890</a></p>
+                <p>Follow us: 
+                    <a href=https://www.facebook.com/login/" target="_blank">Facebook</a> | 
+                    <a href=https://www.instagram.com/accounts/login/?hl=en"target="_blank">Instagram</a>
+                </p>
+            </div>
+        </header>
+    </div>
+    <script>
+        const healthTips = [
+            "Drink at least 8 glasses of water a day.",
+            "Include more fruits and vegetables in your meals.",
+            "Take short breaks during long working hours to stretch and relax.",
+            "Avoid processed foods and opt for whole grains.",
+            "Get at least 7-8 hours of sleep every night.",
+            "Incorporate regular physical activity into your routine.",
+            "Limit sugar intake to maintain stable energy levels.",
+            "Practice mindful eating to avoid overeating.",
+            "Start your day with a healthy breakfast.",
+            "Reduce stress through yoga or meditation."
+        ];
+    
+        function updateDailyTip() {
+            const randomTip = healthTips[Math.floor(Math.random() * healthTips.length)];
+            document.getElementById('daily-tip').innerText = `Health Tip: ${randomTip}`;
+        }
+        updateDailyTip();
+    
+        const recipes = [
+            "Grilled Chicken Salad",
+            "Quinoa and Vegetable Stir Fry",
+            "Smoothie Bowl with Berries and Nuts",
+            "Overnight Oats with Chia Seeds",
+            "Avocado Toast with Egg",
+            "Mediterranean Buddha Bowl",
+            "Vegan Lentil Soup",
+            "Pasta Primavera"
+        ];
+    
+        function updateFeaturedRecipe() {
+            const randomRecipe = recipes[Math.floor(Math.random() * recipes.length)];
+            document.getElementById('featured-recipe').innerText = `Featured Recipe: ${randomRecipe}`;
+        }
+        updateFeaturedRecipe();
+    
+        function calculateBMI() {
+            let weight = document.getElementById("weight").value;
+            let height = document.getElementById("height").value;
+            if (weight && height) {
+                let bmi = (weight / (height * height)).toFixed(2);
+                document.getElementById("bmi-result").innerText = `Your BMI is ${bmi}`;
+            }
+        }
+        const mealOptions = {
+            breakfast: [
+                "Oatmeal with Berries",
+                "Avocado Toast with Egg",
+                "Yogurt with Granola and Honey",
+                "Scrambled Eggs with Spinach",
+                "Smoothie Bowl with Almond Butter"
+            ],
+            lunch: [
+                "Grilled Chicken Salad",
+                "Quinoa and Vegetable Stir Fry",
+                "Lentil Soup with Whole Grain Bread",
+                "Grilled Salmon with Sweet Potatoes",
+                "Pasta Primavera"
+            ],
+            snacks: [
+                "Mixed Nuts and Fruit",
+                "Hummus with Carrot Sticks",
+                "Greek Yogurt with Honey",
+                "Protein Bar",
+                "Apple with Peanut Butter"
+            ],
+            dinner: [
+                "Roasted Chicken with Vegetables",
+                "Grilled Steak with Mashed Potatoes",
+                "Vegetarian Curry with Rice",
+                "Fish Tacos with Slaw",
+                "Pasta with Marinara Sauce"
+            ]
+        };
+
+        function generateMealPlan() {
+            let weeklyGoal = parseInt(document.getElementById("weekly-calories").value) || 0;
+            if (weeklyGoal <= 0) {
+                alert("Please enter a valid weekly calorie goal.");
+            return;
+            }
+
+            let dailyGoal = Math.round(weeklyGoal / 7);
+
+            let breakfastCalories = Math.round(dailyGoal * 0.25);
+            let lunchCalories = Math.round(dailyGoal * 0.35);
+            let snackCalories = Math.round(dailyGoal * 0.15);
+            let dinnerCalories = Math.round(dailyGoal * 0.25);
+
+            const tableBody = document.querySelector("#meal-plan-table tbody");
+            tableBody.innerHTML = ""; 
+
+            const daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+            daysOfWeek.forEach(day => {
+                let row = `
+                <tr>
+                    <td>${day}</td>
+                    <td>${getRandomMeal("breakfast")} (${breakfastCalories} kcal)</td>
+                    <td>${getRandomMeal("lunch")} (${lunchCalories} kcal)</td>
+                    <td>${getRandomMeal("snacks")} (${snackCalories} kcal)</td>
+                    <td>${getRandomMeal("dinner")} (${dinnerCalories} kcal)</td>
+                </tr>
+                `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function getRandomMeal(type) {
+            const options = mealOptions[type];
+            return options[Math.floor(Math.random() * options.length)];
+        }
+
+    
+        let totalCalories = 0, totalWater = 0;
+    
+        function trackMeals() {
+            let breakfast = parseInt(document.getElementById('breakfast').value) || 0;
+            let lunch = parseInt(document.getElementById('lunch').value) || 0;
+            let snack = parseInt(document.getElementById('snack').value) || 0;
+            let dinner = parseInt(document.getElementById('dinner').value) || 0;
+    
+            totalCalories = breakfast + lunch + snack + dinner;
+            document.getElementById('total-calories').textContent = totalCalories;
+
+            let totalCarbs = Math.round((totalCalories * 0.50) / 4); 
+            let totalProtein = Math.round((totalCalories * 0.20) / 4); 
+            let totalFats = Math.round((totalCalories * 0.30) / 9); 
+    
+            document.getElementById('total-carbs').textContent = totalCarbs;
+            document.getElementById('total-protein').textContent = totalProtein;
+            document.getElementById('total-fats').textContent = totalFats;
+    
+            calculateNutritionScore();
+        }
+    
+        function trackWater() {
+            totalWater = parseInt(document.getElementById('water').value) || 0;
+            document.getElementById('total-water').textContent = totalWater;
+    
+            calculateNutritionScore();
+        }
+    
+        function calculateNutritionScore() {
+            let score = 0;
+    
+            if (totalCalories > 0) {
+                score += Math.min((totalCalories / 2000) * 40, 40);
+            }
+    
+            let targetCarbs = Math.round((2000 * 0.50) / 4);
+            let targetProtein = Math.round((2000 * 0.20) / 4);
+            let targetFats = Math.round((2000 * 0.30) / 9);
+    
+            let totalCarbs = parseInt(document.getElementById('total-carbs').textContent) || 0;
+            let totalProtein = parseInt(document.getElementById('total-protein').textContent) || 0;
+            let totalFats = parseInt(document.getElementById('total-fats').textContent) || 0;
+    
+            let carbsScore = Math.min((totalCarbs / targetCarbs) * 20, 20);
+            let proteinScore = Math.min((totalProtein / targetProtein) * 20, 20);
+            let fatsScore = Math.min((totalFats / targetFats) * 10, 10);
+    
+            score += carbsScore + proteinScore + fatsScore;
+    
+            let waterScore = Math.min((totalWater / 2000) * 10, 10);
+            score += waterScore;
+    
+            document.getElementById('nutrition-score').textContent = Math.round(score);
+        }
+    </script>
+    
+</body>
+</html>
